@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://distribuidorapamma.com/sitemap.xml
