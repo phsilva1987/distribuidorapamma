@@ -130,9 +130,6 @@ def layout(slug, body):
 {nav}
     </div>
     <div class="nav-right">
-      <a class="icon-btn ig" href="https://www.instagram.com/distribuidorapamma/" target="_blank" rel="noopener" aria-label="Instagram @distribuidorapamma" title="@distribuidorapamma">
-        <svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>
-      </a>
       <a class="btn btn-wa btn-sm js-wa hdr-wa" href="{R}contato/">
         <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>Solicitar cotação</span>
       </a>
