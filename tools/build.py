@@ -45,6 +45,10 @@ ICONS = """<svg width="0" height="0" style="position:absolute" aria-hidden="true
 <symbol id="i-fan" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="10" r="1.6"/><path d="M12 8.4c0-3 1-5.4 3-5.4s2.4 3-3 5.4ZM13.4 10.8c2.6 1.5 4.2 3.5 3.2 5.2s-3.8.5-3.2-5.2ZM10.6 10.8c-2.6 1.5-5.1 1.9-6.1.2s1.6-3.6 6.1-.2ZM12 11.6V21M8 21h8"/></g></symbol>
 <symbol id="i-truck" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M2 6h12v10H2zM14 9h4l4 4v3h-8z"/><circle cx="6" cy="18" r="2" fill="#fff"/><circle cx="18" cy="18" r="2" fill="#fff"/></g></symbol>
 <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h8M9 17h6"/></g></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+<symbol id="i-card" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></g></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></g></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></g></symbol>
 <symbol id="i-menu" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
 </svg>"""
@@ -95,6 +99,9 @@ def layout(slug, body):
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="{FAVICON}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
   <link rel="stylesheet" href="{R}assets/css/site.css" />
   {SCHEMA if slug == "home" else ""}
 </head>
@@ -102,11 +109,24 @@ def layout(slug, body):
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 {ICONS}
 
-<header class="site-header">
+<div class="topbar">
+  <div class="wrap">
+    <div class="tb-left">
+      <span><i class="dot"></i> Atendimento comercial B2B</span>
+      <span>Alphaville • Barueri/SP</span>
+    </div>
+    <div class="tb-right">
+      <a class="js-wa" href="{R}contato/"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>(11) 91175-2030</span></a>
+      <a href="https://www.instagram.com/distribuidorapamma/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg><span>@distribuidorapamma</span></a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header" id="siteHeader">
   <nav class="wrap" aria-label="Principal">
     <a class="brand" href="{R or './'}" aria-label="Distribuidora Pamma — início">
-      <span class="logo">PAMMA</span>
-      <small>Distribuidora B2B</small>
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span class="brand-txt"><span class="logo">PAMMA</span><small>Distribuidora B2B</small></span>
     </a>
     <div class="navlinks" id="navlinks">
 {nav}
@@ -133,8 +153,8 @@ def layout(slug, body):
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="logo">PAMMA</div>
-        <p style="max-width:360px; line-height:1.6; margin:10px 0 0">Distribuidora B2B de eletrônicos, informática e eletroportáteis para empresas e revendedores.</p>
+        <a class="brand" href="{R or './'}"><span class="brand-mark" aria-hidden="true">P</span><span class="brand-txt"><span class="logo">PAMMA</span><small>Distribuidora B2B</small></span></a>
+        <p style="max-width:360px; line-height:1.65; margin:18px 0 0">Distribuidora B2B de eletrônicos, informática e eletroportáteis para empresas e revendedores.</p>
         <div class="social">
           <a class="ig" href="https://www.instagram.com/distribuidorapamma/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg></a>
           <a class="wa js-wa" href="{R}contato/" aria-label="WhatsApp"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></a>

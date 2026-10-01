@@ -30,6 +30,14 @@
     });
   }
 
+  // Sombra no header ao rolar
+  var header = document.getElementById('siteHeader');
+  if (header) {
+    var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
   // Animação de entrada
   var els = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
