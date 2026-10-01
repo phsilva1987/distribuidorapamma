@@ -150,9 +150,6 @@ def layout(slug, body):
       <div>
         <a class="brand" href="{R or './'}"><span class="brand-mark" aria-hidden="true">P</span><span class="brand-txt"><span class="logo">PAMMA</span><small>Distribuidora B2B</small></span></a>
         <p style="max-width:360px; line-height:1.65; margin:18px 0 0">Distribuidora B2B de eletrônicos, informática e eletroportáteis para empresas e revendedores.</p>
-        <div class="social">
-          <a class="ig" href="https://www.instagram.com/distribuidorapamma/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg></a>
-        </div>
         <!-- TODO: inserir razão social e CNPJ oficiais -->
       </div>
       <div>
@@ -169,7 +166,7 @@ def layout(slug, body):
         <h4>Atendimento</h4>
         <ul>
           <li><a class="js-wa" href="{R}contato/">WhatsApp (11) 91175-2030</a></li>
-          <li><a href="https://www.instagram.com/distribuidorapamma/" target="_blank" rel="noopener">Instagram @distribuidorapamma</a></li>
+          <li><a class="ig-text" href="https://www.instagram.com/distribuidorapamma/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg> Instagram</a></li>
         </ul>
       </div>
       <div>
