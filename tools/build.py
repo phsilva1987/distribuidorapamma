@@ -6,6 +6,7 @@ Edite o conteúdo em src/pages/*.html e rode:  python3 tools/build.py
 Placeholders: {{R}} = caminho relativo até a raiz (ex.: "" ou "../").
 """
 from pathlib import Path
+import hashlib
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
@@ -65,6 +66,16 @@ SCHEMA = """<script type="application/ld+json">
 </script>"""
 
 
+def asset_version():
+    h = hashlib.sha1()
+    for f in ("assets/css/site.css", "assets/js/site.js"):
+        h.update((ROOT / f).read_bytes())
+    return h.hexdigest()[:8]
+
+
+VER = None
+
+
 def layout(slug, body):
     out, title, desc, active = PAGES[slug]
     depth = out.count("/")
@@ -102,25 +113,12 @@ def layout(slug, body):
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
-  <link rel="stylesheet" href="{R}assets/css/site.css" />
+  <link rel="stylesheet" href="{R}assets/css/site.css?v={VER}" />
   {SCHEMA if slug == "home" else ""}
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 {ICONS}
-
-<div class="topbar">
-  <div class="wrap">
-    <div class="tb-left">
-      <span><i class="dot"></i> Atendimento comercial B2B</span>
-      <span>Alphaville • Barueri/SP</span>
-    </div>
-    <div class="tb-right">
-      <a class="js-wa" href="{R}contato/"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>(11) 91175-2030</span></a>
-      <a href="https://www.instagram.com/distribuidorapamma/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg><span>@distribuidorapamma</span></a>
-    </div>
-  </div>
-</div>
 
 <header class="site-header" id="siteHeader">
   <nav class="wrap" aria-label="Principal">
@@ -135,7 +133,7 @@ def layout(slug, body):
       <a class="icon-btn ig" href="https://www.instagram.com/distribuidorapamma/" target="_blank" rel="noopener" aria-label="Instagram @distribuidorapamma" title="@distribuidorapamma">
         <svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>
       </a>
-      <a class="btn btn-wa btn-sm js-wa" href="{R}contato/">
+      <a class="btn btn-wa btn-sm js-wa hdr-wa" href="{R}contato/">
         <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>Solicitar cotação</span>
       </a>
       <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="navlinks">
@@ -157,7 +155,6 @@ def layout(slug, body):
         <p style="max-width:360px; line-height:1.65; margin:18px 0 0">Distribuidora B2B de eletrônicos, informática e eletroportáteis para empresas e revendedores.</p>
         <div class="social">
           <a class="ig" href="https://www.instagram.com/distribuidorapamma/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg></a>
-          <a class="wa js-wa" href="{R}contato/" aria-label="WhatsApp"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></a>
         </div>
         <!-- TODO: inserir razão social e CNPJ oficiais -->
       </div>
@@ -193,7 +190,7 @@ def layout(slug, body):
 </footer>
 
 <a class="fab js-wa" href="{R}contato/" aria-label="Falar no WhatsApp"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></a>
-<script src="{R}assets/js/site.js" defer></script>
+<script src="{R}assets/js/site.js?v={VER}" defer></script>
 </body>
 </html>
 """
@@ -213,6 +210,7 @@ def sitemap():
 
 
 if __name__ == "__main__":
+    VER = asset_version()
     for slug in PAGES:
         body = (SRC / "pages" / f"{slug}.html").read_text(encoding="utf-8")
         print("gerado:", layout(slug, body))

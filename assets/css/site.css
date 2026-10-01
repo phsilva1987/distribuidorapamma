@@ -363,8 +363,8 @@ input:focus,textarea:focus,select:focus{outline:none; background:#fff; border-co
 .social a.wa:hover{background:var(--wa)}
 .footer-bottom{position:relative; margin-top:44px; padding-top:20px; border-top:1px solid rgba(255,255,255,.1); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:12.5px; color:#7f97b2}
 
-/* WhatsApp flutuante */
-.fab{position:fixed; right:20px; bottom:20px; z-index:65; width:58px; height:58px; border-radius:50%; display:grid; place-items:center; background:var(--wa); color:#fff; box-shadow:0 14px 30px rgba(26,158,82,.35); transition:transform .2s}
+/* WhatsApp flutuante (só mobile; no desktop o header já tem o CTA) */
+.fab{display:none; position:fixed; right:20px; bottom:20px; z-index:65; width:58px; height:58px; border-radius:50%; place-items:center; background:var(--wa); color:#fff; box-shadow:0 14px 30px rgba(26,158,82,.35); transition:transform .2s}
 .fab::before{content:""; position:absolute; inset:0; border-radius:50%; border:2px solid var(--wa); animation:ring 2.4s infinite}
 @keyframes ring{0%{transform:scale(1); opacity:.7} 100%{transform:scale(1.6); opacity:0}}
 .fab:hover{transform:scale(1.06)}
@@ -420,8 +420,8 @@ input:focus,textarea:focus,select:focus{outline:none; background:#fff; border-co
   .brand .logo{font-size:21px}
   .brand small{display:none}
   .nav-right{gap:6px}
-  .nav-right .btn span{display:none}
-  .nav-right .btn{padding:10px 12px}
+  .nav-right .hdr-wa{display:none}
+  .fab{display:grid}
   .icon-btn{width:40px; height:40px}
   .hero-grid{padding:44px 0 96px}
   .hero .lead{font-size:16.5px}
